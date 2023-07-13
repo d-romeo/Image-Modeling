@@ -18,10 +18,10 @@ public class IOTools {
         }
     }
 
-    public static void savedImage(BufferedImage img){
+    public static void savedImage(BufferedImage img, String fileName){
         try{
-            File outputFile = new File("savedImage/greyScaleImage.png");
-            ImageIO.write(img, "png", outputFile);
+            File outputFile = new File(fileName);
+            ImageIO.write(img, "jpg", outputFile);
         }catch(IOException e){
             e.printStackTrace();
             System.exit(1);

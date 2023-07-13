@@ -9,15 +9,13 @@ public class GreyScale {
         }
         BufferedImage img = IOTools.read(args[0]);
 
-        BufferedImage greyScaleImage = new BufferedImage(img.getWidth(),img.getHeight(),img.getType());
-        greyScaleImage.getGraphics().drawImage(img,0,0,null);
-        int w = greyScaleImage.getWidth();
-        int h = greyScaleImage.getHeight();
+        int w = img.getWidth();
+        int h = img.getHeight();
         Row[] rows = new Row[h];
         Thread[] threads = new Thread[h];
 
         for(int i=0; i<h; i++){
-            rows[i] = new Row(img.getRGB(0, i, w, h, null, 0, w));
+            rows[i] = new Row(img.getRGB(0, i, w, 1, null, 0, w));
             threads[i] = new Thread(rows[i]);
         }
 
@@ -25,12 +23,12 @@ public class GreyScale {
             threads[i].start();
         }
 
+
         for(int i=0; i<h; i++){
             threads[i].join();
-            greyScaleImage.setRGB(0, i, w, h, rows[i].ARGBInt(), 0, w);
+            img.setRGB(0, i, w, 1, rows[i].ARGBInt(), 0, w);
         }
 
-        IOTools.savedImage(greyScaleImage);
-
+        IOTools.savedImage(img, args[0]);
     }
 }

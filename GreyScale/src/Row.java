@@ -20,10 +20,7 @@ public class Row implements Runnable{
             int g = pixels[i].getG();
             int b = pixels[i].getB();
             int avg = (r + g + b) / 3;
-            r = avg;
-            g = avg;
-            b = avg;
-            pixels[i] = new ARGBPixel(a,r,g,b);
+            pixels[i] = new ARGBPixel(a,avg, avg, avg);
         }
         this.end = true;
     }
