@@ -13,7 +13,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class Controller{
@@ -115,5 +114,6 @@ public class Controller{
         }
         mouseEvent.consume();
         button.setDisable(false);
+        button.setOpacity(1);
     }
 }
