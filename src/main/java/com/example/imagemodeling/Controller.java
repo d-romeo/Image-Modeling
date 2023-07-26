@@ -86,7 +86,7 @@ public class Controller{
 
         if (file != null) {
             try {
-                ImageIO.write(bufferedImage, ".png", file);
+                ImageIO.write(bufferedImage, "png", file);
                 System.out.println("Immagine salvata correttamente.");
             } catch (IOException e) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
