@@ -76,12 +76,17 @@ public class Controller{
     public void save(){
         BufferedImage bufferedImage = img;
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG files (.png)", ".png"));
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter(
+                "Image Files",
+                "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp", "*.tiff", "*.ico",
+                "*.PNG", "*.JPG", "*.JPEG", "*.GIF", "*.BMP", "*.TIFF", "*.ICO"
+        );
+        fileChooser.getExtensionFilters().add(imageFilter);
         File file = fileChooser.showSaveDialog(null);
 
         if (file != null) {
             try {
-                ImageIO.write(bufferedImage, "png", file);
+                ImageIO.write(bufferedImage, ".png", file);
                 System.out.println("Immagine salvata correttamente.");
             } catch (IOException e) {
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -102,6 +107,20 @@ public class Controller{
     public void openFile(MouseEvent mouseEvent) {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
+//Set extension filter
+        FileChooser.ExtensionFilter extFilterALL =
+                new FileChooser.ExtensionFilter("All Files", "*.jpeg", "*.jpg", "*.png",
+                        "*.tiff", "*.tif","*.JPG","*.JPEG", "*.png", "*.TIFF", "*.TIF");
+        FileChooser.ExtensionFilter extFilterJPG =
+                new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG", "*.jpg",
+                        "*.JPEG", "*.jpeg");
+        FileChooser.ExtensionFilter extFilterPDF =
+                new FileChooser.ExtensionFilter("PNG files (*.pdf)", "*.PNG", "*.pdf");
+        FileChooser.ExtensionFilter extFilterTIFF =
+                new FileChooser.ExtensionFilter("TIFF files (*.tiff)", "*.TIF", "*.TIFF",
+                        "*.tif", "*.tiff");
+
+        fileChooser.getExtensionFilters().addAll(extFilterALL,extFilterJPG, extFilterPDF, extFilterTIFF);
 
         img = IOTools.read(file);
         try {
